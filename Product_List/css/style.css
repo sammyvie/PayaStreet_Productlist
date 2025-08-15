@@ -1,0 +1,204 @@
+/* --------------------
+   GENERAL PAGE STYLES
+-------------------- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #066668;
+    color: white;
+}
+
+/* --------------------
+   HEADER STYLES
+-------------------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px; /* less top-bottom padding = more room for logo */
+}
+
+#logo {
+    height: 270px; /* Try 80–120px for a nice header size */
+    width: auto;   /* Keeps proportions */
+    display: block;
+}
+
+
+.search-bar input {
+    color: #004f50;
+    padding: 8px;
+    width: 450px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* --------------------
+   PRODUCT GRID
+-------------------- */
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 55px;    
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* --------------------
+   PRODUCT CARD
+-------------------- */
+.product-card {
+    background-color: #004f50;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Animation delay for each card */
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+.product-card:nth-child(5) { animation-delay: 0.5s; }
+.product-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Product image */
+.product-card img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+}
+
+/* --------------------
+   PRODUCT INFO SECTION
+-------------------- */
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Title & price row */
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 9px;
+}
+
+.product-card h3 {
+    font-size: 21px;
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+.price {
+    font-weight:300;
+    font-size: 21px;
+}
+
+/* Description text */
+.desc {
+    font-size: 12px;
+    color: #ddd;
+    text-align: left;
+    font-weight: 200;
+    margin-bottom: auto; /* pushes button to bottom */
+}
+
+/* --------------------
+   BUTTON
+-------------------- */
+.add-to-cart {
+    margin-top: 12px;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background-color: #009799;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
+}
+
+.add-to-cart:hover {
+    background-color: #00baba;
+    transform: translateY(-2px);
+}
+
+/* Checkout Card */
+.checkout-card {
+    background-color: #094d4d; 
+    color: white;
+    border-radius: 10px;
+    padding: 35px;
+    max-width: 58%;
+    margin: 40px auto;
+    box-shadow: 0 9px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.checkout-card h2 {
+    margin-bottom: 25px;
+    font-size: 1.5em;
+}
+
+.checkout-card label {
+    display: block;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.checkout-card input,
+.checkout-card textarea {
+    width: 98%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+}
+
+.checkout-card textarea {
+    height: 60px;
+    resize: none;
+}
+
+.checkout-card button {
+    background-color: white;
+    color: #094d4d;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 15px;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.checkout-card button:hover {
+    background-color: #066668;
+    color: #ddd;
+}

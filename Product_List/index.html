@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paya Street Coffee</title>
+<link rel="stylesheet" href="./css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+<script>
+    (function(){
+        emailjs.init("cYw1rLWzWn7-v4Aiy"); /* Replace with your actual EmailJS public key */
+    })();
+</script>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <img src="./img/Logo.png" id="logo" alt="Brand Logo">
+    <div class="search-bar">
+        <input type="text" placeholder="Search">
+    </div>
+</header>
+
+
+<!-- PRODUCT LIST -->
+<section class="products">
+    <div class="product-card">
+        <img src="./img/Paya_Iced_Latte.JPG" alt="Paya Iced Latte">
+        <div class="product-info">
+            <div class="product-header">
+                <h3>Paya Iced Latte</h3>
+                <div class="price">₱120</div>
+            </div>
+            <p>Bold espresso with smooth milk, iced to perfection.</p>
+            <button class="add-to-cart" data-name="Paya Iced Latte" data-price="120">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="./img/Seasalt_Cream_Latte.JPG" alt="Sea Salt Cream Coffee">
+        <div class="product-info">
+            <div class="product-header">
+                <h3>Sea Salt Cream Coffee</h3>
+                <div class="price">₱135</div>
+            </div>
+            <p>Signature iced coffee topped with light, salty cream foam.</p>
+            <button class="add-to-cart" data-name="Sea Salt Cream Coffee" data-price="135">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="./img/Spanish_Latte.JPG" alt="Spanish Latte">
+        <div class="product-info">
+            <div class="product-header">
+                <h3>Spanish Latte</h3>
+                <div class="price">₱130</div>
+            </div>
+            <p>A sweet and creamy classic with a strong caffeine kick.</p>
+            <button class="add-to-cart" data-name="Spanish Latte" data-price="130">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="./img/Matcha_Latte.png" alt="Matcha Latte">
+        <div class="product-info">
+            <div class="product-header">
+                <h3>Matcha Latte</h3>
+                <div class="price">₱135</div>
+            </div>
+            <p>Earthy matcha with creamy milk — a refreshing favorite.</p>
+            <button class="add-to-cart" data-name="Matcha Latte" data-price="135">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="./img/Triple White Mocha.png" alt="Triple White Mocha">
+        <div class="product-info">
+            <div class="product-header">
+                <h3>Triple White Mocha</h3>
+                <div class="price">₱150</div>
+            </div>
+            <p>White chocolate with espresso and milk indulgence.</p>
+            <button class="add-to-cart" data-name="Triple White Mocha" data-price="150">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="./img/Almond_Jelly.JPG" alt="Paya Almond Jelly">
+        <div class="product-info">
+            <div class="product-header">
+                <h3>Paya Almond Jelly</h3>
+                <div class="price">₱135</div>
+            </div>
+            <p>Blend of coffee or milk tea with almond jelly — creamy and addictive.</p>
+            <button class="add-to-cart" data-name="Paya Almond Jelly" data-price="135">Add to cart</button>
+        </div>
+    </div>
+</section>
+<!-- CHECKOUT FORM -->
+<div class="checkout-card">
+    <h2>Checkout</h2>
+    <form id="orderForm">
+        <label for="user_email">Email:</label>
+        <input type="email" name="user_email" id="user_email" required>
+
+        <label for="order_details">Order Details:</label>
+        <textarea name="order_details" id="order_details" readonly></textarea>
+
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+
+<script>
+(function(){
+    emailjs.init("k5sNQ4Zxa3dB-grlr"); 
+})();
+
+let cart = [];
+
+document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", () => {
+        const name = button.getAttribute("data-name");
+        const price = button.getAttribute("data-price");
+        cart.push(`${name} - ₱${price}`);
+        document.getElementById("order_details").value = cart.join("\n");
+    });
+});
+
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_bje71hi", "template_o3kisqi", this)
+    .then(() => {
+        alert("Order sent successfully!");
+        cart = [];
+        document.getElementById("order_details").value = "";
+        this.reset();
+    }, (err) => {
+        alert("Failed to send order: " + JSON.stringify(err));
+    });
+});
+
+// Search filter
+document.querySelector(".search-bar input").addEventListener("input", function() {
+    const searchValue = this.value.toLowerCase();
+    const products = document.querySelectorAll(".product-card");
+
+    products.forEach(product => {
+        const productName = product.querySelector("h3").textContent.toLowerCase();
+        const productDesc = product.querySelector("p").textContent.toLowerCase();
+        
+        if (productName.includes(searchValue) || productDesc.includes(searchValue)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+});
+
+</script>
+</body>
+</html>
